@@ -1,0 +1,59 @@
+class Solution {
+    public List<Boolean> camelMatch(String[] queries, String pattern) {
+        
+        List<Boolean> result = new ArrayList<>();
+        for(String query : queries){
+            
+            result.add(checkQuery(query,pattern));
+        }
+        
+        return result;
+        
+    }
+        
+        public boolean checkQuery(String query, String pattern){
+            
+            int qIndex=0, pIndex=0;
+            int qLen = query.length();
+            int pLen = pattern.length();
+            char qChar,pChar;
+            
+            while(qIndex<qLen && pIndex<pLen){
+                
+                qChar = query.charAt(qIndex);
+                pChar = pattern.charAt(pIndex);
+                if(qChar == pChar){
+                    
+                    qIndex++;
+                    pIndex++;
+                }else if(Character.isLowerCase(qChar)){
+                    
+                    qIndex++;
+                }else {
+                    
+                    return false;
+                }
+            }
+            
+            if(qIndex == qLen && pIndex<pLen){
+                
+                return false;
+            }
+            
+            while(qIndex<qLen){
+                
+                qChar = query.charAt(qIndex);
+                
+                if(Character.isUpperCase(qChar)){
+                    
+                    return false;
+                    
+                }
+                    
+                    qIndex++;
+                
+            }
+            
+            return true;
+        }
+    }
